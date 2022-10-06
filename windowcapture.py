@@ -6,8 +6,6 @@ import win32con
 import win32gui
 import win32ui
 
-import debugger
-
 
 class WindowCapture:
     # properties

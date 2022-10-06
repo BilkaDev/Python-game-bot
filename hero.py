@@ -7,8 +7,6 @@ import pydirectinput
 import time
 
 
-# import cv2
-
 # pytesseract.pytesseract.tesseract_cmd = r'C:\Users\royal\AppData\Local\Tesseract-OCR\tesseract.exe'
 
 
@@ -48,12 +46,14 @@ class Hero:
         else:
             self.is_heal = False
 
-    def check_backpack(self,wincap):
-        if self.time_last_check_bp + 5 > time.time():
+    def check_backpack(self, wincap):
+        if self.time_last_check_bp + 1 > time.time():
             return
-        list = config.last_item_in_bp_location
+        x, y = config.item_bp_last_slot
+        utils.mouse_click(x, y)
+        lists = config.last_item_in_bp_location
         check = False
-        for pos in list:
+        for pos in lists:
             if wincap.get_pixel_onscreen(pos) != 1315602:
                 check = True
         self.is_full_backpack = check

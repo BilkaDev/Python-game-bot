@@ -1,9 +1,13 @@
+from windowcapture import WindowCapture
+
 import win32gui, win32api
 import time
 
+wincap = WindowCapture('CABAL')
 
-def get_pixel(window):
-    wDC = win32gui.GetWindowDC(window)
+
+def get_pixel():
+    wDC = win32gui.GetWindowDC(wincap.hwnd)
     x, y = win32gui.GetCursorPos()
     print(x, y)
     print(win32gui.GetPixel(wDC, x, y))

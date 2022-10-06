@@ -1,4 +1,3 @@
-import debugger
 from windowcapture import WindowCapture
 from hero import Hero
 
@@ -6,7 +5,6 @@ import time
 import pyautogui
 import pydirectinput
 import keyboard
-# import cv2
 
 HEAL_SHORTCUT = '0'
 # 2 skill must be +1 key
