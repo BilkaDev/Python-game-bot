@@ -22,7 +22,7 @@ class Hero:
     def __init__(self, cd):
         self.cd = cd
 
-    def check_hp(self, img, shortcut):
+    def check_hp(self, img, hp, shortcut):
         # y = 16
         # x = 75
         # h = 17
@@ -38,7 +38,7 @@ class Hero:
         #     self.hp = hp_number
         y, x, h, w = config.localization_hp_bar
         crop = img[y:y + h, x:x + w]
-        b, g, r = crop[6, 91]
+        b, g, r = crop[int(h / 2), int(w * hp)]
         if 150 > r:
             self.is_heal = True
             self.heal(shortcut)

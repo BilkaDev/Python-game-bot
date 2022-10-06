@@ -7,11 +7,11 @@ import pydirectinput
 import keyboard
 
 HEAL_SHORTCUT = '0'
-
 # 2 skill must be +1 key
 ATTACK_SHORTCUT = '6'
 
 CD_FIRST_ATTACK_SPELL = 4.5
+HP_MIN = 0.7
 
 wincap = WindowCapture('CABAL')
 hero = Hero(CD_FIRST_ATTACK_SPELL)
@@ -27,7 +27,7 @@ while not keyboard.is_pressed('q'):
     fullscreen_image = wincap.get_screenshot()
     isTarget = hero.is_target(fullscreen_image)
 
-    hero.check_hp(fullscreen_image, HEAL_SHORTCUT)
+    hero.check_hp(fullscreen_image, HP_MIN, HEAL_SHORTCUT)
     # print('FPS {}'.format(time.time() - loop_time))
     # loop_time = time.time()
 
