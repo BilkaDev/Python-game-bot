@@ -5,6 +5,7 @@ import time
 import pyautogui
 import pydirectinput
 import keyboard
+import cv2
 
 HEAL_SHORTCUT = '0'
 # 2 skill must be +1 key
@@ -23,13 +24,15 @@ pydirectinput.keyUp("z")
 
 # press "q" to stop!
 while not keyboard.is_pressed('q'):
-    # loop_time = time.time()
-    fullscreen_image = wincap.get_screenshot()
-    isTarget = hero.is_target(fullscreen_image)
+    loop_time = time.time()
+    hp_target_image = wincap.get_hp_target_img()
+    # cv2.imshow('Result', fullscreen_image)
+    # cv2.waitKey()
+    isTarget = hero.is_target(hp_target_image)
 
-    hero.check_hp(fullscreen_image, HP_MIN, HEAL_SHORTCUT)
-    # print('FPS {}'.format(time.time() - loop_time))
-    # loop_time = time.time()
+    hero.check_hp(hp_target_image, HP_MIN, HEAL_SHORTCUT)
+    print('FPS {}'.format(time.time() - loop_time))
+    loop_time = time.time()
 
     if isTarget:
         hero.attack(ATTACK_SHORTCUT)

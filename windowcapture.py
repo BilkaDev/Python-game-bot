@@ -1,3 +1,5 @@
+import config
+
 import numpy as np
 import win32con
 import win32gui
@@ -80,24 +82,22 @@ class WindowCapture:
 
         return img
 
-    def get_hp_img(self):
-        hp_w = 100
-        hp_h = 100
-
+    def get_hp_target_img(self):
+        w, h = config.image_hp_target_wh
         # get the window image data
         wDC = win32gui.GetWindowDC(self.hwnd)
         dcObj = win32ui.CreateDCFromHandle(wDC)
         cDC = dcObj.CreateCompatibleDC()
         dataBitMap = win32ui.CreateBitmap()
-        dataBitMap.CreateCompatibleBitmap(dcObj, hp_w, hp_h)
+        dataBitMap.CreateCompatibleBitmap(dcObj, w, h)
         cDC.SelectObject(dataBitMap)
-        cDC.BitBlt((0, 0), (hp_w, hp_h), dcObj, (self.cropped_x, self.cropped_y), win32con.SRCCOPY)
+        cDC.BitBlt((0, 0), (w, h), dcObj, (self.cropped_x, self.cropped_y), win32con.SRCCOPY)
 
         # convert the raw data into a format opencv can read
         # dataBitMap.SaveBitmapFile(cDC, 'debug.bmp')
         signedIntsArray = dataBitMap.GetBitmapBits(True)
         img = np.fromstring(signedIntsArray, dtype='uint8')
-        img.shape = (hp_h, hp_w, 4)
+        img.shape = (h, w, 4)
 
         # free resources
         dcObj.DeleteDC()
