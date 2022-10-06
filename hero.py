@@ -1,4 +1,5 @@
 from vision import Vision
+import config
 
 # import pytesseract
 import pydirectinput
@@ -35,12 +36,7 @@ class Hero:
         # except:
         #     hp_number = 10
         #     self.hp = hp_number
-
-        # NIE ZMIENIAC BO NA VM SĄ INNE WARTOŚĆI
-        y = 14
-        x = 75
-        h = 12
-        w = 130
+        y, x, h, w = config.localization_hp_bar
         crop = img[y:y + h, x:x + w]
         b, g, r = crop[6, 91]
         if 150 > r:
@@ -55,11 +51,7 @@ class Hero:
         pydirectinput.keyUp(shortcut)
 
     def is_target(self, screen_to_search):
-        # NIE ZMIENIAC BO NA VM SĄ INNE WARTOŚĆI
-        y = 0
-        x = 345
-        h = 40
-        w = 40
+        y, x, h, w = config.localization_attack_target
         img = screen_to_search[y:y + h, x:x + w]
         # cv2.imshow('Result', img)
         # cv2.waitKey()
