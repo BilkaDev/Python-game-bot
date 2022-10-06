@@ -1,9 +1,12 @@
 import config
+import utils
 
 import numpy as np
 import win32con
 import win32gui
 import win32ui
+
+import debugger
 
 
 class WindowCapture:
@@ -118,6 +121,10 @@ class WindowCapture:
         img = np.ascontiguousarray(img)
 
         return img
+
+    def get_pixel_onscreen(self, pos):
+        x, y = pos
+        return utils.get_pixel(self.hwnd, x, y)
 
     # find the name of the window you're interested in.
     # once you have it, update window_capture()

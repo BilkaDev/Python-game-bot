@@ -1,5 +1,6 @@
 from vision import Vision
 import config
+import utils
 
 # import pytesseract
 import pydirectinput
@@ -13,11 +14,13 @@ import time
 
 class Hero:
     # properties
-    is_heal = False
     target_img = Vision('image/target-monster-icon.jpg')
+    is_heal = False
     is_attack = False
+    is_full_backpack = False
     cd = 0.
     last_time_cast_spell = time.time()
+    time_last_check_bp = time.time()
 
     def __init__(self, cd):
         self.cd = cd
@@ -44,6 +47,17 @@ class Hero:
             self.heal(shortcut)
         else:
             self.is_heal = False
+
+    def check_backpack(self,wincap):
+        if self.time_last_check_bp + 5 > time.time():
+            return
+        list = config.last_item_in_bp_location
+        check = False
+        for pos in list:
+            if wincap.get_pixel_onscreen(pos) != 1315602:
+                check = True
+        self.is_full_backpack = check
+        self.time_last_check_bp = time.time()
 
     def heal(self, shortcut):
         pydirectinput.keyDown(shortcut)

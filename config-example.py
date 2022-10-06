@@ -3,3 +3,5 @@
 # localization_attack_target = (y,x,h,w)
 
 # image_hp_target_wh = (w, h)
+
+# last_item_in_bp_location = [(985, 544), (986, 535), (988, 526), (997, 535)]
