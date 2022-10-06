@@ -47,7 +47,7 @@ class Hero:
             self.is_heal = False
 
     def check_backpack(self, wincap):
-        if self.time_last_check_bp + 1 > time.time():
+        if self.time_last_check_bp + 30 > time.time():
             return
         x, y = config.item_bp_last_slot
         utils.mouse_click(x, y)
