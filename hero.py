@@ -50,6 +50,7 @@ class Hero:
         if self.time_last_check_bp + 30 > time.time():
             return
         utils.mouse_click(config.item_bp_last_slot)
+        time.sleep(0.1)
         lists = config.last_item_in_bp_location
         check = False
         for pos in lists:
@@ -76,7 +77,6 @@ class Hero:
                 point_y = slot_y / 2 + (slot_y * y) + inventory_y
                 point_x = slot_x / 2 + (slot_x * x) + inventory_x
                 utils.mouse_click([int(point_x), int(point_y)])
-                time.sleep(0.1)
 
         # Agree extract
         utils.mouse_click(config.extract_start_button_localization)
