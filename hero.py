@@ -86,6 +86,8 @@ class Hero:
         time.sleep(3)
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
+        sort_x, sort_y = config.extract_localization
+        utils.mouse_click([sort_x - 50, sort_y + 30])
 
     def heal(self, shortcut):
         pydirectinput.keyDown(shortcut)
