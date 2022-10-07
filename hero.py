@@ -62,6 +62,13 @@ class Hero:
             self.item_extract()
 
     def item_extract(self):
+        # sort items
+        sort_x, sort_y = config.extract_localization
+        utils.mouse_click([sort_x - 50, sort_y + 30])
+        # open slot 1 in inventory
+        slot_2_x, slot_2_y = config.item_bp_last_slot
+        utils.mouse_click([slot_2_x - 50, slot_2_y])
+
         inventory_x, inventory_y, inventory_w, inventory_h = config.inventory_box
         count_slot_h, count_slot_v = config.count_slot_hv
         # img = wincap.get_snip_snap_img(730, 165, inventory_w, inventory_h)
@@ -86,7 +93,6 @@ class Hero:
         time.sleep(3)
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
-        sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
 
     def heal(self, shortcut):
