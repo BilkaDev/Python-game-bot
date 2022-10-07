@@ -7,7 +7,8 @@ def get_pixel(window, x, y):
     return win32gui.GetPixel(wDC, x, y)
 
 
-def mouse_click(x, y):
+def mouse_click(pos):
+    x, y = pos
     win32api.SetCursorPos((x, y))
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN, x, y, 0, 0)
     time.sleep(0.1)

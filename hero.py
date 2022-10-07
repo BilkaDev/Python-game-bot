@@ -49,8 +49,7 @@ class Hero:
     def check_backpack(self, wincap):
         if self.time_last_check_bp + 30 > time.time():
             return
-        x, y = config.item_bp_last_slot
-        utils.mouse_click(x, y)
+        utils.mouse_click(config.item_bp_last_slot)
         lists = config.last_item_in_bp_location
         check = False
         for pos in lists:
@@ -58,6 +57,35 @@ class Hero:
                 check = True
         self.is_full_backpack = check
         self.time_last_check_bp = time.time()
+        if check:
+            self.item_extract()
+
+    def item_extract(self):
+        inventory_x, inventory_y, inventory_w, inventory_h = config.inventory_box
+        count_slot_h, count_slot_v = config.count_slot_hv
+        # img = wincap.get_snip_snap_img(730, 165, inventory_w, inventory_h)
+
+        # Open extract item
+        utils.mouse_click(config.extract_localization)
+
+        # Select items
+        slot_x = (inventory_w / count_slot_h)
+        slot_y = (inventory_h / count_slot_v)
+        for y in range(count_slot_v):
+            for x in range(count_slot_h):
+                point_y = slot_y / 2 + (slot_y * y) + inventory_y
+                point_x = slot_x / 2 + (slot_x * x) + inventory_x
+                utils.mouse_click([int(point_x), int(point_y)])
+                time.sleep(0.1)
+
+        # Agree extract
+        utils.mouse_click(config.extract_start_button_localization)
+        utils.mouse_click(config.extract_confirm_button_localization)
+
+        # Extracting...
+        time.sleep(5)
+        # Exit
+        utils.mouse_click(config.extract_exit_button_localization)
 
     def heal(self, shortcut):
         pydirectinput.keyDown(shortcut)

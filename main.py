@@ -5,10 +5,7 @@ from windowcapture import WindowCapture
 from hero import Hero
 
 import time
-import pyautogui
-import pydirectinput
 import keyboard
-
 
 HEAL_SHORTCUT = '0'
 # 2 skill must be +1 key
@@ -19,11 +16,6 @@ HP_MIN = 0.7
 
 wincap = WindowCapture('CABAL')
 hero = Hero(CD_FIRST_ATTACK_SPELL)
-# click cabal desktop
-pyautogui.click(485, 150)
-pydirectinput.keyDown("z")
-time.sleep(0.2)
-pydirectinput.keyUp("z")
 
 # press "q" to stop! "e"  to start
 is_run = False
@@ -37,8 +29,6 @@ while True:
         isTarget = hero.is_target(hp_target_image)
         hero.check_backpack(wincap)
         hero.check_hp(hp_target_image, HP_MIN, HEAL_SHORTCUT)
-        if hero.is_full_backpack:
-            print("BP IS FULL")
         # print('FPS {}'.format(time.time() - loop_time))
         # loop_time = time.time()
 
