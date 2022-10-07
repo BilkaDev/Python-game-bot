@@ -12,4 +12,7 @@
 # count_slot_hv = (7, 8)
 
 # Item extract position
-# localization_extract = (0, 0)
+# extract_localization = (744, 519)
+# extract_start_button_localization = (580, 529)
+# extract_confirm_button_localization = (744, 519)
+# extract_exit_button_localization = (744, 519)
