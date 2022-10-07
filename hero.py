@@ -21,7 +21,7 @@ class Hero:
     last_time_cast_spell = time.time()
     time_last_check_bp = time.time()
 
-    def check_hp(self, img ):
+    def check_hp(self, img):
         hp = config.auto["HP_MIN"]
         # y = 16
         # x = 75
@@ -46,7 +46,7 @@ class Hero:
             self.is_heal = False
 
     def check_backpack(self, wincap):
-        if self.time_last_check_bp + 30 > time.time():
+        if self.time_last_check_bp + 120 > time.time():
             return
         utils.mouse_click(config.item_bp_last_slot)
         time.sleep(0.1)
@@ -106,7 +106,7 @@ class Hero:
             self.check_hp(hp_target_image)
             if self.is_heal:
                 # hp potion localization
-                utils.mouse_click([638,701])
+                utils.mouse_click([638, 701])
             time.sleep(0.35)
 
     def heal(self):
