@@ -78,7 +78,9 @@ class Hero:
         # Select items
         slot_x = (inventory_w / count_slot_h)
         slot_y = (inventory_h / count_slot_v)
+        wincap = WindowCapture(config.game_name)
         for y in range(count_slot_v):
+            self.check_hp(wincap.get_hp_target_img())
             for x in range(count_slot_h):
                 point_y = slot_y / 2 + (slot_y * y) + inventory_y
                 point_x = slot_x / 2 + (slot_x * x) + inventory_x
@@ -102,9 +104,12 @@ class Hero:
         while sleep_time > time.time():
             hp_target_image = wincap.get_hp_target_img()
             self.check_hp(hp_target_image)
+            if self.is_heal:
+                # hp potion localization
+                utils.mouse_click([638,701])
             time.sleep(0.35)
 
-    def heal(self, shortcut):
+    def heal(self):
         shortcut = config.shortcuts["HEAL_SHORTCUT"]
         pydirectinput.keyDown(shortcut)
         time.sleep(0.1)

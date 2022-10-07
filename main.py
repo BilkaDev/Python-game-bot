@@ -1,5 +1,7 @@
 import os
 
+import pyautogui
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from windowcapture import WindowCapture
@@ -22,7 +24,8 @@ while True:
         # cv2.imshow('Result', fullscreen_image)
         # cv2.waitKey()
         isTarget = hero.is_target(hp_target_image)
-        hero.check_hp(hp_target_image)
+        pyautogui.pixel(166,52)
+        # hero.check_hp(hp_target_image)
         # print('FPS {}'.format(time.time() - loop_time))
         # loop_time = time.time()
 
