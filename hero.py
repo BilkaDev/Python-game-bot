@@ -1,6 +1,7 @@
 from vision import Vision
-import config
 import utils
+from windowcapture import WindowCapture
+import config
 
 # import pytesseract
 import pydirectinput
@@ -16,14 +17,12 @@ class Hero:
     is_heal = False
     is_attack = False
     is_full_backpack = False
-    cd = 0.
+    cd = config.auto["CD_FIRST_ATTACK_SPELL"]
     last_time_cast_spell = time.time()
     time_last_check_bp = time.time()
 
-    def __init__(self, cd):
-        self.cd = cd
-
-    def check_hp(self, img, hp, shortcut):
+    def check_hp(self, img ):
+        hp = config.auto["HP_MIN"]
         # y = 16
         # x = 75
         # h = 17
@@ -42,7 +41,7 @@ class Hero:
         b, g, r = crop[int(h / 2), int(w * hp)]
         if 150 > r:
             self.is_heal = True
-            self.heal(shortcut)
+            self.heal()
         else:
             self.is_heal = False
 
@@ -84,18 +83,29 @@ class Hero:
                 point_y = slot_y / 2 + (slot_y * y) + inventory_y
                 point_x = slot_x / 2 + (slot_x * x) + inventory_x
                 utils.mouse_click([int(point_x), int(point_y)])
+                time.sleep(0.05)
 
         # Agree extract
         utils.mouse_click(config.extract_start_button_localization)
         utils.mouse_click(config.extract_confirm_button_localization)
 
         # Extracting...
-        time.sleep(3)
+        self.time_sleep_heal(15)
+
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
         utils.mouse_click([sort_x - 50, sort_y + 30])
 
+    def time_sleep_heal(self, s):
+        sleep_time = time.time() + s
+        wincap = WindowCapture(config.game_name)
+        while sleep_time > time.time():
+            hp_target_image = wincap.get_hp_target_img()
+            self.check_hp(hp_target_image)
+            time.sleep(0.35)
+
     def heal(self, shortcut):
+        shortcut = config.shortcuts["HEAL_SHORTCUT"]
         pydirectinput.keyDown(shortcut)
         time.sleep(0.1)
         pydirectinput.keyUp(shortcut)
@@ -108,7 +118,8 @@ class Hero:
         is_target = self.target_img.is_on_screen(img)
         return is_target
 
-    def attack(self, attack_shortcut):
+    def attack(self):
+        attack_shortcut = config.shortcuts["ATTACK_SHORTCUT"]
         spell_cd_time = self.last_time_cast_spell + self.cd
         if self.is_attack and spell_cd_time > time.time():
             return

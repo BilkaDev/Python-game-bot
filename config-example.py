@@ -1,3 +1,6 @@
+# game_name = "CABAL"
+
+
 # y,x,h,w
 # localization_hp_bar = (y,x,h,w)
 # localization_attack_target = (y,x,h,w)
@@ -16,3 +19,16 @@
 # extract_start_button_localization = (580, 529)
 # extract_confirm_button_localization = (744, 519)
 # extract_exit_button_localization = (744, 519)
+
+# # shortcuts
+# shortcuts = {
+#     "HEAL_SHORTCUT": '0',
+#     "ATTACK_SHORTCUT": '6',
+#
+# }
+#
+# # auto
+# auto = {
+#     "HP_MIN": 0.7,
+#     "CD_FIRST_ATTACK_SPELL": 4.5,
+# }
