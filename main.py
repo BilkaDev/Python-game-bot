@@ -27,7 +27,6 @@ while True:
         # cv2.imshow('Result', fullscreen_image)
         # cv2.waitKey()
         isTarget = hero.is_target(hp_target_image)
-        hero.check_backpack(wincap)
         hero.check_hp(hp_target_image, HP_MIN, HEAL_SHORTCUT)
         # print('FPS {}'.format(time.time() - loop_time))
         # loop_time = time.time()
@@ -37,6 +36,7 @@ while True:
         else:
             hero.stop_attack()
             hero.get_loot()
+            hero.check_backpack(wincap)
             hero.find_target()
             time.sleep(0.2)
     else:
