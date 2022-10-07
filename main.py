@@ -14,7 +14,7 @@ import keyboard
 wincap = WindowCapture(config.game_name)
 hero = Hero()
 
-# press "q" to stop! "e"  to start
+# press "q" to stop! "e"  to start.
 is_run = False
 while True:
     if is_run:
