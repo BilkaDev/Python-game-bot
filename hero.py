@@ -83,7 +83,7 @@ class Hero:
         utils.mouse_click(config.extract_confirm_button_localization)
 
         # Extracting...
-        time.sleep(5)
+        time.sleep(3)
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
 
