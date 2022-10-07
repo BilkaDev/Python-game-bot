@@ -11,7 +11,7 @@ HEAL_SHORTCUT = '0'
 # 2 skill must be +1 key
 ATTACK_SHORTCUT = '6'
 
-CD_FIRST_ATTACK_SPELL = 7
+CD_FIRST_ATTACK_SPELL = 4.5
 HP_MIN = 0.7
 
 wincap = WindowCapture('CABAL')
