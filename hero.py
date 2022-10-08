@@ -56,7 +56,8 @@ class Hero:
             return
         self.time_last_check_bp = time.time()
         if self.is_full_backpack:
-            self.item_extract()
+            self.item_extract(2)
+            self.item_extract(2)
 
         # old version
         # utils.mouse_click(config.item_bp_last_slot)
@@ -71,13 +72,14 @@ class Hero:
         # if self.is_full_backpack:
         # self.item_extract()
 
-    def item_extract(self):
+    def item_extract(self, part=2):
         # open inventory
         pydirectinput.press('i')
-        time.sleep(0.05)
+        time.sleep(0.6)
         # sort items
         sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
+        time.sleep(0.2)
         # open slot 1 in inventory
         slot_2_x, slot_2_y = config.item_bp_last_slot
         utils.mouse_click([slot_2_x - 50, slot_2_y])
@@ -95,24 +97,24 @@ class Hero:
         wincap = WindowCapture(config.game_name)
         for y in range(count_slot_v):
             self.check_hp(wincap.get_hp_target_img())
-            for x in range(count_slot_h):
+            for x in range(int(count_slot_h / part)):
                 point_y = slot_y / 2 + (slot_y * y) + inventory_y
                 point_x = slot_x / 2 + (slot_x * x) + inventory_x
                 utils.mouse_click([int(point_x), int(point_y)])
-                time.sleep(0.05)
+                time.sleep(0.1)
 
         # Agree extract
         utils.mouse_click(config.extract_start_button_localization)
         utils.mouse_click(config.extract_confirm_button_localization)
 
         # Extracting...
-        self.time_sleep_heal(15)
+        self.time_sleep_heal(7)
 
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
         utils.mouse_click([sort_x - 50, sort_y + 30])
         pydirectinput.press('i')
-        time.sleep(0.05)
+        time.sleep(0.1)
 
     def time_sleep_heal(self, s):
         sleep_time = time.time() + s
