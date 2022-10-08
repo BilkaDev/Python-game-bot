@@ -1,14 +1,15 @@
+import cv2
+
 from vision import Vision
 import utils
 from windowcapture import WindowCapture
 import config
 
-# import pytesseract
+import pytesseract
 import pydirectinput
 import time
 
-
-# pytesseract.pytesseract.tesseract_cmd = r'C:\Users\royal\AppData\Local\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'C:\Users\royal\AppData\Local\Tesseract-OCR\tesseract.exe'
 
 
 class Hero:
@@ -46,21 +47,35 @@ class Hero:
             self.is_heal = False
 
     def check_backpack(self, wincap):
-        if self.time_last_check_bp + 120 > time.time():
+        wincap = WindowCapture(config.game_name)
+        img = wincap.get_snip_snap_img(810, 610, 200, 80)
+        # cv2.imshow("R", img)
+        # cv2.waitKey()
+        string = pytesseract.image_to_string(img, config=r'--oem 3 --psm 6')
+        self.is_full_backpack = 'cannot gain more items' in string
+        if self.time_last_check_bp + 15 > time.time():
             return
-        utils.mouse_click(config.item_bp_last_slot)
-        time.sleep(0.1)
-        lists = config.last_item_in_bp_location
-        check = False
-        for pos in lists:
-            if wincap.get_pixel_onscreen(pos) != 1315602:
-                check = True
-        self.is_full_backpack = check
         self.time_last_check_bp = time.time()
-        if check:
+        if self.is_full_backpack:
             self.item_extract()
 
+        # old version
+        # utils.mouse_click(config.item_bp_last_slot)
+        # time.sleep(0.1)
+        # lists = config.last_item_in_bp_location
+        # check = False
+        # for pos in lists:
+        #     if wincap.get_pixel_onscreen(pos) != 1315602:
+        #         check = True
+        # self.is_full_backpack = check
+        # self.time_last_check_bp = time.time()
+        # if self.is_full_backpack:
+        # self.item_extract()
+
     def item_extract(self):
+        # open inventory
+        pydirectinput.press('i')
+        time.sleep(0.05)
         # sort items
         sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
@@ -97,6 +112,8 @@ class Hero:
         # Exit
         utils.mouse_click(config.extract_exit_button_localization)
         utils.mouse_click([sort_x - 50, sort_y + 30])
+        pydirectinput.press('i')
+        time.sleep(0.05)
 
     def time_sleep_heal(self, s):
         sleep_time = time.time() + s
