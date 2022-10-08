@@ -79,7 +79,7 @@ class Hero:
         # sort items
         sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
-        time.sleep(0.2)
+        time.sleep(0.4)
         # open slot 1 in inventory
         slot_2_x, slot_2_y = config.item_bp_last_slot
         utils.mouse_click([slot_2_x - 50, slot_2_y])
@@ -95,9 +95,9 @@ class Hero:
         slot_x = (inventory_w / count_slot_h)
         slot_y = (inventory_h / count_slot_v)
         wincap = WindowCapture(config.game_name)
-        for y in range(count_slot_v):
+        for y in range(int(count_slot_v / part)):
             self.check_hp(wincap.get_hp_target_img())
-            for x in range(int(count_slot_h / part)):
+            for x in range(count_slot_h):
                 point_y = slot_y / 2 + (slot_y * y) + inventory_y
                 point_x = slot_x / 2 + (slot_x * x) + inventory_x
                 utils.mouse_click([int(point_x), int(point_y)])
@@ -105,8 +105,10 @@ class Hero:
 
         # Agree extract
         utils.mouse_click(config.extract_start_button_localization)
+        time.sleep(0.1)
         utils.mouse_click(config.extract_confirm_button_localization)
-
+        time.sleep(0.1)
+        
         # Extracting...
         self.time_sleep_heal(7)
 
