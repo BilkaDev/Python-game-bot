@@ -108,7 +108,7 @@ class Hero:
         time.sleep(0.1)
         utils.mouse_click(config.extract_confirm_button_localization)
         time.sleep(0.1)
-        
+
         # Extracting...
         self.time_sleep_heal(7)
 
