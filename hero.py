@@ -79,10 +79,11 @@ class Hero:
         # sort items
         sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
-        time.sleep(0.9)
+        time.sleep(0.8)
         # open slot 1 in inventory
         slot_2_x, slot_2_y = config.item_bp_last_slot
         utils.mouse_click([slot_2_x - 50, slot_2_y])
+        time.sleep(0.2)
 
         inventory_x, inventory_y, inventory_w, inventory_h = config.inventory_box
         count_slot_h, count_slot_v = config.count_slot_hv
@@ -90,6 +91,7 @@ class Hero:
 
         # Open extract item
         utils.mouse_click(config.extract_localization)
+        time.sleep(0.3)
 
         # Select items
         slot_x = (inventory_w / count_slot_h)
