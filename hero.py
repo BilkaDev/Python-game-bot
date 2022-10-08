@@ -47,7 +47,6 @@ class Hero:
             self.is_heal = False
 
     def check_backpack(self, wincap):
-        wincap = WindowCapture(config.game_name)
         img = wincap.get_snip_snap_img(810, 610, 200, 80)
         # cv2.imshow("R", img)
         # cv2.waitKey()
