@@ -128,7 +128,7 @@ class Hero:
             self.check_hp(hp_target_image)
             if self.is_heal:
                 # hp potion localization
-                utils.mouse_click([638, 701])
+                utils.mouse_click_right([638, 701])
             time.sleep(0.35)
 
     def heal(self):
