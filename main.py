@@ -1,4 +1,5 @@
 import os
+
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from windowcapture import WindowCapture
@@ -14,8 +15,8 @@ hero = Hero()
 # press "q" to stop! "e"  to start.
 is_run = False
 while True:
-    hero.buff()
     if is_run:
+        hero.buff()
         is_run = not keyboard.is_pressed('q')
         # loop_time = time.time()
         hp_target_image = wincap.get_hp_target_img()
