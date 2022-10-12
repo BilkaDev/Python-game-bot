@@ -17,6 +17,7 @@ class Hero:
     target_img = Vision('image/target-monster-icon.jpg')
     is_heal = False
     is_attack = False
+    buff_cd = 0
     is_full_backpack = False
     cd = config.auto["CD_FIRST_ATTACK_SPELL"]
     last_time_cast_spell = time.time()
@@ -79,11 +80,11 @@ class Hero:
         # sort items
         sort_x, sort_y = config.extract_localization
         utils.mouse_click([sort_x - 50, sort_y + 30])
-        time.sleep(0.8)
+        time.sleep(1)
         # open slot 1 in inventory
         slot_2_x, slot_2_y = config.item_bp_last_slot
         utils.mouse_click([slot_2_x - 50, slot_2_y])
-        time.sleep(0.2)
+        time.sleep(0.3)
 
         inventory_x, inventory_y, inventory_w, inventory_h = config.inventory_box
         count_slot_h, count_slot_v = config.count_slot_hv
@@ -175,3 +176,13 @@ class Hero:
         pydirectinput.keyDown('space')
         time.sleep(0.1)
         pydirectinput.keyUp('space')
+
+    def buff(self):
+        if self.buff_cd + 1200 < time.time():
+            pydirectinput.keyDown('alt')
+            pydirectinput.keyDown('2')
+            time.sleep(0.1)
+            pydirectinput.keyUp('alt')
+            pydirectinput.keyUp('2')
+            self.buff_cd = time.time()
+

@@ -14,6 +14,7 @@ hero = Hero()
 # press "q" to stop! "e"  to start.
 is_run = False
 while True:
+    hero.buff()
     if is_run:
         is_run = not keyboard.is_pressed('q')
         # loop_time = time.time()
